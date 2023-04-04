@@ -8,6 +8,7 @@ namespace SuperHeroes__DC_VS_MARVEL_
     
     internal class Program
     {
+
         static void Main(string[] args)
         {
             // amount of wins
@@ -38,24 +39,23 @@ namespace SuperHeroes__DC_VS_MARVEL_
             if (answer == 1) filename = "super1.txt";
             if (answer == 2) filename = "super2.txt";
             if (answer == 3) filename = "super3.txt";
-            //streamwriter to write ouput
-            using (StreamWriter output = new StreamWriter("")
-            {     
-                    List<string> heroes = new List<string>();
-
-                    string input = filename.ReadLine();
+    
+           
+                    string input = (filename);
                     while (input != null)
                     {
-                        heroes.Add(input);
-                        input = filename.ReadLine();
+                        Data.Add(input);
+                        if input = (filename);
                     }
-                    filename.Close();
-                    // lists
-                    List<string> marvel = new List<string>();
+            int marvelhero = 0;
+            int dchero = 0;
+
+            // lists
+            List<string> marvel = new List<string>();
                     List<string> dc = new List<string>();
 
                     // for each line we needa split it and check heroes name and universe from left and right side after index 0 comma
-                    foreach (string line in heroes)
+                    foreach (string line in marvel)
                     {
                         // seperating each split
                         string[] broken = line.Split(',');
@@ -72,62 +72,40 @@ namespace SuperHeroes__DC_VS_MARVEL_
                             dc.Add(heroName);
                         }
                     }
-                
+
+            using (StreamWriter output = new StreamWriter("output.txt"))
+            {
                 // Outputs 
-                    output.WriteLine("battle " + battle + ":");
-                    output.WriteLine("marvel heroes:");
-                    // order from least to greatest 
-                    foreach (string hero in marvel.OrderBy(h => h))
-                    {
-                        // add hero
-                        output.WriteLine("-" + hero);
-                    }
-                    output.WriteLine("dc heroes:");
-                    foreach (string hero in dc.OrderBy(h => h))
-                    {
-                        // add hero
-                        output.WriteLine("-" + hero);
-                    }
-                    if (marvelhero > dchero)
-                    {
-                        // win per battle
-                        output.WriteLine("avengers win for marvel");
-                        marvelwins++;
-                    }
-                    else if (dchero > marvelhero)
-                    {
-                        // win per battle
-                        output.WriteLine("justice league win for dc");
-                        dcwins++;
-                    }
-                    else
-                    {
-                            //tie?
-                        output.WriteLine(" tie!");
-                    }
-                    output.WriteLine();
+                output.WriteLine("battle " + ":");
+                output.WriteLine("marvel heroes:");
+                // order from least to greatest 
+                foreach (string hero in marvel.OrderBy(h => h))
+                {
+                    // add hero
+                    output.WriteLine("-" + hero);
                 }
-
-                        // for the WINS overall
-                        output.WriteLine();
-                        if (marvelwins > dcwins)
-                        {
-                            output.WriteLine("marvel for overall win");
-                        }
-                        else if (dcwins > marvelwins)
-                        {
-                            output.WriteLine("justice league overall win for dc");
-                        }
-                        else
-                        {
-                            output.WriteLine("tie");
+                output.WriteLine("dc heroes:");
+                foreach (string hero in dc.OrderBy(h => h))
+                {
+                    // add hero
+                    output.WriteLine("-" + hero);
+                }
+                if (marvelhero > dchero)
+                {
+                    // win per battle
+                    output.WriteLine("avengers win for marvel");
+                    marvelwins++;
+                }
+                else if (dchero > marvelhero);
+                    }
+                  
                         }
                     }
                 }
 
-            }
+            
 
-        }
+        
 
 
 
