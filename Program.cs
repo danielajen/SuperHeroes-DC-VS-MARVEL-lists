@@ -40,89 +40,181 @@ namespace SuperHeroes__DC_VS_MARVEL_
             if (answer == 3) filename = "super3.txt";
 
             // read file and add each line to Data list
-            using (StreamReader sr = new StreamReader(filename))
+            StreamReader output = new StreamReader(filename);
+            List<string> allList = new List<string>();
+            string[] allData;
+            string[] words;
+            string input = "";
+            input = output.ReadLine();
+
+            allData = input.Split(' '); 
+            #region Lists
+           
+            List<string> battle1 = new List<string>();
+            List<string> battle2 = new List<string>();
+            List<string> battle3 = new List<string>();
+            List<string> Marvel1 = new List<string>();
+            List<string> Marvel2 = new List<string>();
+            List<string> Marvel3 = new List<string>();
+            List<string> DC1 = new List<string>();
+            List<string> DC2 = new List<string>();
+            List<string> DC3 = new List<string>();
+            #endregion
+            #region splits
+
+            // splitting the line into universe and hero name
+            foreach (string hero in allData)
             {
-                string input = sr.ReadLine();
-                while (input != null)
+                words = hero.Split(","); // AT COMMA
+                 
+                if (words[0] == "1")
                 {
-                    Data.Add(input);
-                    input = sr.ReadLine();
+                    battle1.Add(words[1]);
+                }
+                if (words[0] == "2")
+                {
+                    battle2.Add(words[1]);
+                }
+                if (words[0] == "3")
+                {
+                    battle3.Add(words[1]);
                 }
             }
-
-            // create output file and write the results
-            using (StreamWriter output = new StreamWriter("output.txt"))
+            foreach (string universe in battle1) // universe marvel or dc coming from . split
             {
-                // for each line we need to split it and check heroes name and universe from left and right side after index 0 comma
-                int battleCount = 1;
-                foreach (string line in Data)
+                words = universe.Split("."); // AT period
+
+                if (words[0] == "Marvel")
                 {
-                    int marvelhero = 0;
-                    int dchero = 0;
-
-                    List<string> marvel = new List<string>();
-                    List<string> dc = new List<string>();
-
-                    // splitting the line into universe and hero name
-                    string[] parts = line.Split(',');
-                    string universe = parts[1].Split('.')[0];
-                    string heroName = parts[1].Split('.')[1];
-
-                    if (universe == "Marvel")
-                    {
-                        // if marvel
-                        marvelhero ++;
-                        marvel.Add(heroName);
-                    }
-                    else
-                    {
-                        // if dc
-                        dchero ++;
-                        dc.Add(heroName);
-                    }
-
-                    // output results for each battle
-                    output.WriteLine("Battle " + battleCount + ":");
-                    output.WriteLine("Marvel heroes (" + marvelhero + "):");
-                    marvel.Sort(); // sorting the hero names
-                    foreach (string hero in marvel)
-                    {
-                        output.WriteLine("- " + hero);
-                    }
-
-                    output.WriteLine("DC heroes (" + dchero + "):");
-                    dc.Sort(); // sorting the hero names
-                    foreach (string hero in dc)
-                    {
-                        output.WriteLine("- " + hero);
-                    }
-
-                    if (marvelhero > dchero)
-                    {
-                        output.WriteLine("Avengers win for Marvel");
-                        marvelwins++;
-                    }
-                    else if (dchero > marvelhero)
-                    {
-                        output.WriteLine("Justice League win for DC");
-                        dcwins++;
-                    }
-                    else
-                    {
-                        output.WriteLine("It's a tie");
-                    }
-
-                    battleCount++;
+                    Marvel1.Add(words[1]);
                 }
-
-                output.WriteLine("Overall wins:");
-                output.WriteLine("Marvel: " + marvelwins);
-                output.WriteLine("DC: " + dcwins);
-
+                if (words[0] == "DC")
+                {
+                    DC1.Add(words[1]);
+                }
             }
+            foreach (string universe in battle2) // universe marvel or dc coming from . split
+            {
+                words = universe.Split("."); // AT period
+
+                if (words[0] == "Marvel")
+                {
+                    Marvel2.Add(words[1]);
+                }
+                if (words[0] == "DC")
+                {
+                    DC2.Add(words[1]);
+                }
+            }
+                    foreach (string universe in battle3) // universe marvel or dc coming from . split
+                    {
+                        words = universe.Split("."); // AT period
+
+                        if (words[0] == "Marvel")
+                        {
+                            Marvel3.Add(words[1]);
+                        }
+                        if (words[0] == "DC")
+                        {
+                            DC3.Add(words[1]);
+                        }
+                    }
+            #endregion
+            #region sort
+            Marvel1.Sort();
+            DC1.Sort();
+            Marvel2.Sort();
+            DC2.Sort();
+            Marvel3.Sort();
+            DC3.Sort();
+            #endregion
+            // foreach loop for winners of each battle
+            Console.WriteLine("battle 1");
+            Console.WriteLine();
+            
+            foreach (string inputs in Marvel1) Console.WriteLine(inputs + "  : Marvel 1");
+            foreach (string inputs in DC1) Console.WriteLine(inputs + "  : DC 1"); // each inputs
+            Console.WriteLine();
+            if (Marvel1.Count > DC1.Count)
+            {
+                Console.WriteLine("Marvel Wins");
+                marvelwins++;
+            }
+            else if (Marvel1.Count == DC1.Count)
+            {
+                Console.WriteLine("TIE! EVEN DOMINATION!");
+            }
+            else
+            {
+                Console.WriteLine("DC WINS!");
+                dcwins++;
+            }
+            Console.WriteLine();
+            Console.WriteLine("battle 2");
+            Console.WriteLine();
+
+            foreach (string inputs in Marvel2) Console.WriteLine(inputs + "  : Marvel 2");
+            foreach (string inputs in DC2) Console.WriteLine(inputs + "  : DC 2"); // each inputs
+            Console.WriteLine();
+            if (Marvel2.Count > DC2.Count)
+            {
+                Console.WriteLine("Marvel Wins");
+                marvelwins++;
+            }
+            else if (Marvel2.Count == DC2.Count)
+            {
+                Console.WriteLine("TIE! EVEN DOMINATION!");
+            }
+            else
+            {
+                Console.WriteLine("DC WINS!");
+                dcwins++;
+            }
+            Console.WriteLine();
+            Console.WriteLine("battle 3");
+            Console.WriteLine();
+
+            foreach (string inputs in Marvel3) Console.WriteLine(inputs + "  : Marvel 3");
+            foreach (string inputs in DC3) Console.WriteLine(inputs + "  : DC 3"); // each inputs
+            Console.WriteLine();
+            if (Marvel3.Count > DC3.Count)
+            {
+                Console.WriteLine("Marvel Wins");
+                marvelwins++;
+            }
+            else if (Marvel3.Count == DC3.Count)
+            {
+                Console.WriteLine("TIE! EVEN DOMINATION!");
+            }
+            else
+            {
+                Console.WriteLine("DC WINS!");
+                dcwins++;
+            }
+            // overall domination
+            Console.WriteLine();
+            if (marvelwins > dcwins)
+            {
+                Console.WriteLine("Overall Marvel dominated DC! THERREFORE MARVEL WINS!");
+            }
+            else if (marvelwins == dcwins)
+            {
+                Console.WriteLine("Overall it must be a tie!");
+            }
+            else
+            {
+                Console.WriteLine("Overall the DC JUSTICE LEAGUE dominated Marvel! THERREFORE DC WINS!");
+            }
+
+
         }
+
+       
+
     }
-}
+    }
+
+
 
 
 
